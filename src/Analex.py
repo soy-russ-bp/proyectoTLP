@@ -1,5 +1,4 @@
-
-archivo = open("factorial.mio", "r")
+archivo = open("factorialE1.mio", "r")
 
 reservadas = ["PROGRAMA", "FINPROG", "SI", "ENTONCES", "SINO", "FINSI", "REPITE", "VECES", "FINREP", "IMPRIME", "LEE"]
 operadoresA = ["+", "-", "*", "/"]
@@ -139,7 +138,3 @@ Tabla()
 FACTORIALSIM("factorial.sim")
 FactorialLEX()
 UNIDADESINCORRECTAS()
-
-
-
-
