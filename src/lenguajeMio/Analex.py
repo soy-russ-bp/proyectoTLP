@@ -1,4 +1,4 @@
-archivo = open("factorialE1.mio", "r")
+archivo = open("lenguajeMio/factorial.mio", "r")
 
 reservadas = ["PROGRAMA", "FINPROG", "SI", "ENTONCES", "SINO", "FINSI", "REPITE", "VECES", "FINREP", "IMPRIME", "LEE"]
 operadoresA = ["+", "-", "*", "/"]
