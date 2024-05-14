@@ -1,6 +1,6 @@
-archivo = open("lenguajeTaan/programaE1.taan", "r")
+archivo = open("lenguajeTaan/programa.taan", "r")
 
-reservadas = ["chuunbes", "xuul", "antal", "waa", "tuun", "achak", "lxtak"]
+reservadas = ["chuunbes", "xuul", "antal", "waa", "tuun", "achak", "lxtak", "tsiib" ]
 operadoresA = ["+", "-", "*", "/"]  # Asumimos operadores aritméticos básicos
 operadoresR = ["<", ">", "==", "<=", ">="]  # Agregar operadores de comparación completos
 asignacion = ["antal"]  # Uso de 'antal' como asignación, similar a 'es'
