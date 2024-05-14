@@ -1,5 +1,4 @@
-
-archivo = open("programa.taan", "r")
+archivo = open("lenguajeTaan/programa.taan", "r")
 
 reservadas = ["chuunbes", "xuul", "antal", "waa", "tuun", "achak", "lxtak", "tsiib" ]
 operadoresA = ["+", "-", "*", "/"]  # Asumimos operadores aritméticos básicos
@@ -82,13 +81,23 @@ def imprimir_resultados():
     print("Tokens Señalados:")
     for token in tokensSeñalados:
         print(token)
-
     if tokens_NA:
         print("\nTokens No Reconocidos:")
         for token in tokens_NA:
             print(token)
+            
+def escribir_resultados_en_archivo():
+    archivo = open("lenguajeTaan/tokens.lex", "w")
+    for token in tokensSeñalados:
+        archivo.write(token + "\n")
+    if tokens_NA:
+        archivo.write("\nTokens No Reconocidos:\n")
+        for token in tokens_NA:
+            archivo.write(token + "\n")
+    archivo.close()
 
 # Ejecutar funciones
 separar_tokens()
 identificar_tipo()
 imprimir_resultados()
+escribir_resultados_en_archivo()

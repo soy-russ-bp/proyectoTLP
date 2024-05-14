@@ -16,7 +16,7 @@ tokens = []
 index = 0
 
 def cargar_tokens():
-    with open("programa.lex", "r") as archivo:
+    with open("lenguajeTaan/tokens.lex", "r") as archivo:
         global tokens
         tokens = [line.strip() for line in archivo.readlines()]
 
@@ -172,20 +172,17 @@ def el():
     return True
 
 def op():
-    if token_actual() == "[num]":
+    if token_actual() in ["[num]", "[id]", "[txt]"]:  # Permitir identificadores también, además de números y textos
         siguiente_token()
-        if token_actual() in ["[op_ar]"]:
+        if token_actual() in ["[op_ar]"]:  # Si hay un operador aritmético, espera otra parte de la expresión
             siguiente_token()
-            if token_actual() != "[num]":
-                error("Se esperaba un número después del operador")
+            if token_actual() not in ["[num]", "[id]", "[txt]"]:  # Permitir números, identificadores o textos
+                error("Se esperaba un número, identificador o texto después del operador")
                 return False
             siguiente_token()
         return True
-    elif token_actual() == "[txt]":
-        siguiente_token()
-        return True
     else:
-        error("Se esperaba un número o texto después de 'antal'")
+        error("Se esperaba un número, identificador o texto después de 'antal'")
         return False
 
 def token_actual():
