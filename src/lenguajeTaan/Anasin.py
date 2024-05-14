@@ -6,7 +6,7 @@
 <STMT> -> WAA <CONDICION> CHUUNBES <STMTS> XUUL
 <STMT> -> WAA <CONDICION> CHUUNBES <STMTS> XUUL ACHAK WAA
 <CONDICION> CHUUNBES <STMTS> XUUL
-<STMT> LXTAK <CONDICION> CHUUNBES <STMTS> XUUL
+<STMT> IXTAK <CONDICION> CHUUNBES <STMTS> XUUL
 <CONDICION> -> <EL> COMPARADOR <EL>
 <EL> -> VARIABLE | NUMERO
 <OP> -> NUMERO OPERADOR NUMERO | NUMERO | TEXTO
@@ -47,7 +47,7 @@ def stmt():
         return imprimir()
     elif token_actual() == "waa":
         return condicional()
-    elif token_actual() == "lxtak":
+    elif token_actual() == "ixtak":
         return loop()
     else:
         error("Sentencia desconocida o inesperada")
