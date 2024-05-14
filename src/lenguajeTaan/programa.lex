@@ -8,7 +8,7 @@ waa
 [num]
 tuun
 chuunbes
-[id]
+tsiib
 [txt]
 xuul
 xuul
