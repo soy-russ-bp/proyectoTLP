@@ -73,9 +73,42 @@ def imprimir():
     return True
 
 def condicional():
+    """siguiente_token()
+    if not condicion():
+        return False
+    if token_actual() == "chuunbes":
+        siguiente_token()
+        if not stmts():
+            return False
+        if token_actual() != "xuul":
+            error("Se esperaba 'xuul' después de los enunciados de 'waa'")
+            return False
+        siguiente_token()
+        if token_actual() == "achak":
+            siguiente_token()
+            if token_actual() != "waa":
+                error("Se esperaba 'waa' después de 'achak'")
+                return False
+            siguiente_token()
+            if not stmts():
+                return False
+            if token_actual() != "xuul":
+                error("Se esperaba 'xuul' después de los enunciados de 'achak waa'")
+                return False
+            siguiente_token()
+    elif token_actual() == "xuul":
+        siguiente_token()
+    else:
+        error("Se esperaba 'chuunbes' o 'xuul' después de la condición")
+        return False
+    return True"""
     siguiente_token()
     if not condicion():
         return False
+    if token_actual() != "tuun":
+        error("Se esperaba 'tuun' después de la condición")
+        return False
+    siguiente_token()
     if token_actual() != "chuunbes":
         error("Se esperaba 'chuunbes' después de la condición")
         return False
@@ -90,6 +123,10 @@ def condicional():
         siguiente_token()
         if token_actual() != "waa":
             error("Se esperaba 'waa' después de 'achak'")
+            return False
+        siguiente_token()
+        if token_actual() != "chuunbes":
+            error("Se esperaba 'chuunbes' después de la condición")
             return False
         siguiente_token()
         if not stmts():
@@ -162,7 +199,7 @@ def siguiente_token():
     index += 1
 
 def error(mensaje):
-    print(f"Error en la compilación: {mensaje} en el token '{token_actual()}' en la posición {index}")
+    print(f"Error en la compilación: {mensaje} en el token '{token_actual()}' en la posición {index+1}")
 
 # Cargar tokens desde el archivo y comenzar análisis
 cargar_tokens()

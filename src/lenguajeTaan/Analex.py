@@ -1,4 +1,4 @@
-archivo = open("lenguajeTaan/programaE1.taan", "r")
+archivo = open("programa.taan", "r")
 
 reservadas = ["chuunbes", "xuul", "antal", "waa", "tuun", "achak", "lxtak"]
 operadoresA = ["+", "-", "*", "/"]  # Asumimos operadores aritméticos básicos
