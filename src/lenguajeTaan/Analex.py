@@ -107,15 +107,15 @@ def Tabla():
             if isinstance(posicion, str):  # Asegurarte de que la posición es una cadena
                 if es_identificador(posicion):
                     tabla_simbolos[0].append(posicion + ', ' + "ID" + str(i))
-                    print(f"Añadiendo identificador: {posicion}")
+                    #print(f"Añadiendo identificador: {posicion}")
                     i += 1
                 elif es_texto(posicion):
                     tabla_simbolos[1].append(posicion + ', ' + "TX" + str(j))
-                    print(f"Añadiendo texto: {posicion}")
+                    #print(f"Añadiendo texto: {posicion}")
                     j += 1
             elif isinstance(posicion, int):  # Asegurarte de que la posición es un entero
                 tabla_simbolos[2].append(str(posicion) + ', ' + "VAL" + str(k))
-                print(f"Añadiendo valor numérico: {posicion}")
+                #print(f"Añadiendo valor numérico: {posicion}")
                 k += 1
 
 def archivo_tabla_datos(path):

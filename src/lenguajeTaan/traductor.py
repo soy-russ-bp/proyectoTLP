@@ -1,40 +1,65 @@
-def taan_a_python(archivo_taan, archivo_py):
-    # Leer el archivo .taan
-    with open(archivo_taan, "r") as file:
-        lineas = file.readlines()
+import Analex
 
-    # Analizar cada línea y construir el código Python
-    codigo_python = []
-    indentacion = 0
-    for linea in lineas:
-        tokens = linea.strip().split()
-        if not tokens:
-            continue
-        if tokens[0] == "chuunbes":
-            codigo_python.append("    " * indentacion + "def bloque():")
-            indentacion += 1
-        elif tokens[0] == "xuul":
-            indentacion -= 1
-        elif tokens[0] == "antal":
-            # Convertir la asignación a Python
-            var = tokens[1]
-            valor = tokens[2]
-            if "," in valor:
-                valor = valor.replace(",", ".")  # Conversión simplificada
-            codigo_python.append("    " * indentacion + f"{var} = {valor}")
-        elif tokens[0] == "waa" and tokens[2] == "<":
-            condicion = f"{tokens[1]} < {tokens[3]}"
-            codigo_python.append("    " * indentacion + f"if {condicion}:")
-            indentacion += 1
-        elif tokens[0] == "tuun":
-            indentacion -= 1
-        elif tokens[0] == "tsiib":
-            texto = ' '.join(tokens[1:])
-            codigo_python.append("    " * indentacion + f"print({texto})")
+# Diccionario de equivalencias de palabras reservadas de Taan a Python
+traducciones = {
+    'chuunbes': '',  # Inicialmente definido para definir una función, pero no usado aquí
+    'xuul': '',  # No directamente utilizado, solo para controlar la indentación
+    'antal': '=',  # Operador de asignación
+    'waa': 'if',  # Instrucción condicional if
+    'tuun': ':',  # Inicio de bloque de código
+    'tsiib': 'print(',  # Inicio de la función print en Python
+}
 
-    # Escribir el resultado en un archivo .py
-    with open(archivo_py, "w") as file:
-        file.write("\n".join(codigo_python))
+def traducir_linea(linea, nivel_indentacion):
+    tokens = linea.strip().split()
+    linea_traducida = []
+    indentacion = '    ' * nivel_indentacion  # Crea una indentación basada en el nivel actual
+    i = 0
+    while i < len(tokens):
+        token = tokens[i]
+        if token in traducciones:
+            if token == 'tuun':  # 'tuun' indica un nuevo bloque de código
+                linea_traducida.append(':')
+                break  # Finaliza el procesamiento de la línea
+            elif token == 'tsiib':  # Manejo especial para print
+                linea_traducida.append(traducciones[token])  # Añade 'print('
+                i += 1  # Avanza al siguiente token, que es el primer parámetro
+                # Maneja múltiples parámetros hasta final de línea o xuul
+                while i < len(tokens) and tokens[i] != 'xuul': #aquí se supone que maneja el print
+                    if tokens[i].startswith('"'):  # Si es una cadena literal
+                        # Agrega el texto directamente
+                        linea_traducida.append(tokens[i])
+                    else:
+                        # Añade el resto de tokens directamente, asumiendo que son variables o expresiones
+                        linea_traducida.append(' ' + tokens[i])
+                    i += 1
+                linea_traducida.append(')')  # Cierra la función print
+                continue
+            else:
+                linea_traducida.append(traducciones[token])
+        elif Analex.es_numero(token):
+            numero_traducido = Analex.convertir_numero(token)
+            linea_traducida.append(str(numero_traducido))
+        elif token in Analex.operadoresA or token in Analex.operadoresR:
+            linea_traducida.append(token)
+        else:
+            linea_traducida.append(token)
+        i += 1
 
-# Ejemplo de uso:
-taan_a_python("lenguajeTaan/programa.taan", "programa.py")
+    return indentacion + ' '.join(linea_traducida)
+
+def traducir_archivo_taan(path_entrada, path_salida):
+    nivel_indentacion = 0
+    with open(path_entrada, 'r') as archivo_entrada, open(path_salida, 'w') as archivo_salida:
+        for linea in archivo_entrada:
+            if linea.strip() and not linea.startswith('#'):
+                if 'tuun' in linea:
+                    archivo_salida.write(traducir_linea(linea, nivel_indentacion) + '\n')
+                    nivel_indentacion += 1
+                elif 'xuul' in linea:
+                    nivel_indentacion -= 1
+                else:
+                    archivo_salida.write(traducir_linea(linea, nivel_indentacion) + '\n')
+
+# Ejecutar la traducción
+traducir_archivo_taan("lenguajeTaan/programa2.taan", "traduccion.py")
