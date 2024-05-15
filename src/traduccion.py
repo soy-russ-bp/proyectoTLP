@@ -1,7 +1,5 @@
 
-i = 0
-j = 2
-if i < j :
+variable = 7
+if variable < 10 :
     
-    i = j + 1
-    print( "numero"  ,  i )
+    print( "El  valor  es  menor  que  10" )

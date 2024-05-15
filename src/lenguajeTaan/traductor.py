@@ -25,7 +25,7 @@ def traducir_linea(linea, nivel_indentacion):
                 linea_traducida.append(traducciones[token])  # Añade 'print('
                 i += 1  # Avanza al siguiente token, que es el primer parámetro
                 # Maneja múltiples parámetros hasta final de línea o xuul
-                while i < len(tokens) and tokens[i] != 'xuul': #aquí se supone que maneja el print
+                while i < len(tokens) and tokens[i] != 'xuul':
                     if tokens[i].startswith('"'):  # Si es una cadena literal
                         # Agrega el texto directamente
                         linea_traducida.append(tokens[i])
@@ -60,6 +60,3 @@ def traducir_archivo_taan(path_entrada, path_salida):
                     nivel_indentacion -= 1
                 else:
                     archivo_salida.write(traducir_linea(linea, nivel_indentacion) + '\n')
-
-# Ejecutar la traducción
-traducir_archivo_taan("lenguajeTaan/programa2.taan", "traduccion.py")

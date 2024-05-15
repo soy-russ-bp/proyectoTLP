@@ -203,5 +203,7 @@ def analizador_sintactico():
     cargar_tokens()
     if programa():
         print("Compilación exitosa")
+        return True
     else:
         print("Error en la compilación")
+        return False

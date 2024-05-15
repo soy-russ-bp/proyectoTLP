@@ -1,4 +1,4 @@
-archivo = open("lenguajeTaan/programa2.taan", "r")
+
 
 reservadas = ["chuunbes", "xuul", "antal", "waa", "tuun", "achak", "lxtak", "tsiib" ]
 operadoresA = ["+", "-", "*", "/"]  # Asumimos operadores aritméticos básicos
@@ -9,7 +9,8 @@ tokensSeñalados = []
 tokens_NA = []
 tabla_datos = [[], [], []]
 
-def separar_tokens():
+def separar_tokens(archivo):
+    archivo = open(archivo, "r")
     contenidos = archivo.readlines()
     global tokens 
     tokens = []
@@ -48,7 +49,9 @@ def convertir_numero(s):
 def es_texto(s):
     return s.startswith('"') and s.endswith('"')
 
+
 def identificar_tipo():
+    lenguaje_aceptado = True
     num_linea = 1
     for t in tokens:
         num_linea += 1
@@ -75,6 +78,9 @@ def identificar_tipo():
         else:
             tokensSeñalados.append(t + "<NA>")
             tokens_NA.append(f"{t}, línea {num_linea}")
+            lenguaje_aceptado = False
+    return lenguaje_aceptado
+            
 
 def imprimir_resultados():
     print("Tokens Señalados:")
@@ -133,10 +139,11 @@ def archivo_tabla_datos(path):
         archivo.write('\n'.join(tabla_simbolos[2]) + '\n')
 
 # Ejecutar funciones
-def analizador_lexico():
-    separar_tokens()
-    identificar_tipo()
+def analizador_lexico(archivo_path):
+    separar_tokens(archivo_path)
+    lenguaje_aceptado = identificar_tipo()
     imprimir_resultados()
     escribir_resultados_en_archivo()
     Tabla()
     archivo_tabla_datos("lenguajeTaan/tabla_datos.txt")
+    return lenguaje_aceptado
