@@ -199,8 +199,9 @@ def error(mensaje):
     print(f"Error en la compilación: {mensaje} en el token '{token_actual()}' en la posición {index+1}")
 
 # Cargar tokens desde el archivo y comenzar análisis
-cargar_tokens()
-if programa():
-    print("Compilación exitosa")
-else:
-    print("Error en la compilación")
+def analizador_sintactico():
+    cargar_tokens()
+    if programa():
+        print("Compilación exitosa")
+    else:
+        print("Error en la compilación")

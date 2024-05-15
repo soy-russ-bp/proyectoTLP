@@ -7,7 +7,7 @@ antal
 [num]
 waa
 [id]
-antal
+[op_rel]
 [id]
 tuun
 chuunbes

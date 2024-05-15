@@ -1,4 +1,4 @@
-archivo = open("lenguajeTaan/programa3.taan", "r")
+archivo = open("lenguajeTaan/programa2.taan", "r")
 
 reservadas = ["chuunbes", "xuul", "antal", "waa", "tuun", "achak", "lxtak", "tsiib" ]
 operadoresA = ["+", "-", "*", "/"]  # Asumimos operadores aritméticos básicos
@@ -67,8 +67,7 @@ def identificar_tipo():
         elif es_numero(t):
             tokensSeñalados.append("[num]")
             num_decimal = convertir_numero(t)
-            if num_decimal not in tabla_datos[1]:
-                tabla_datos[1].append(num_decimal)
+            tabla_datos[1].append(num_decimal)
         elif es_texto(t):
             tokensSeñalados.append("[txt]")
             if t not in tabla_datos[2]:
@@ -95,9 +94,49 @@ def escribir_resultados_en_archivo():
         for token in tokens_NA:
             archivo.write(token + "\n")
     archivo.close()
+    
+    
+tabla_simbolos = [ [], [], [] ]
+ 
+def Tabla():
+    i = 1
+    j = 1
+    k = 1
+    for fila in tabla_datos:
+        for posicion in fila:
+            if isinstance(posicion, str):  # Asegurarte de que la posición es una cadena
+                if es_identificador(posicion):
+                    tabla_simbolos[0].append(posicion + ', ' + "ID" + str(i))
+                    print(f"Añadiendo identificador: {posicion}")
+                    i += 1
+                elif es_texto(posicion):
+                    tabla_simbolos[1].append(posicion + ', ' + "TX" + str(j))
+                    print(f"Añadiendo texto: {posicion}")
+                    j += 1
+            elif isinstance(posicion, int):  # Asegurarte de que la posición es un entero
+                tabla_simbolos[2].append(str(posicion) + ', ' + "VAL" + str(k))
+                print(f"Añadiendo valor numérico: {posicion}")
+                k += 1
+
+def archivo_tabla_datos(path):
+    with open(path, 'w') as archivo:
+        # Identificadores
+        archivo.write("IDS\n")
+        archivo.write('\n'.join(tabla_simbolos[0]) + '\n\n')
+
+        # Textos
+        archivo.write("TXT\n")
+        archivo.write('\n'.join(tabla_simbolos[1]) + '\n\n')
+
+        # Números
+        archivo.write("VAL\n")
+        archivo.write('\n'.join(tabla_simbolos[2]) + '\n')
 
 # Ejecutar funciones
-separar_tokens()
-identificar_tipo()
-imprimir_resultados()
-escribir_resultados_en_archivo()
+def analizador_lexico():
+    separar_tokens()
+    identificar_tipo()
+    imprimir_resultados()
+    escribir_resultados_en_archivo()
+    Tabla()
+    archivo_tabla_datos("lenguajeTaan/tabla_datos.txt")

@@ -1,0 +1,11 @@
+IDS
+i, ID1
+j, ID2
+
+TXT
+"numero", TX1
+
+VAL
+0, VAL1
+2, VAL2
+1, VAL3

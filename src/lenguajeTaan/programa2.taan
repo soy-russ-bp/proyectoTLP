@@ -1,5 +1,6 @@
 chuunbes
 i antal 0
+#la numeración es vigesimal de izquierda a derecha: w*20^n+...+x*20^2+y*20^1+z*20^0
 j antal 0,..
 waa i < j tuun
  chuunbes
