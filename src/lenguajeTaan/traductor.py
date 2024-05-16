@@ -1,4 +1,5 @@
 import Analex
+import Anasin
 
 # Diccionario de equivalencias de palabras reservadas de Taan a Python
 traducciones = {
@@ -8,10 +9,11 @@ traducciones = {
     'waa': 'if',  # Instrucción condicional if
     'tuun': ':',  # Inicio de bloque de código
     'tsiib': 'print(',  # Inicio de la función print en Python
+    'ixtak': 'while',  # Instrucción de bucle while
 }
 
 def traducir_linea(linea, nivel_indentacion):
-    tokens = linea.strip().split()
+    tokens = linea.strip().split() 
     linea_traducida = []
     indentacion = '    ' * nivel_indentacion  # Crea una indentación basada en el nivel actual
     i = 0
@@ -35,6 +37,21 @@ def traducir_linea(linea, nivel_indentacion):
                     i += 1
                 linea_traducida.append(')')  # Cierra la función print
                 continue
+            elif token == 'ixtak':  # 'manejo especial para while'
+                linea_traducida.append(traducciones[token])  # Añade 'while'
+                i += 1  # Avanza al siguiente token, que es la condición
+                # Añade la condición, pero si es número, lo convierte
+                while i < len(tokens) and tokens[i] != '\n':
+                    if Analex.es_numero(tokens[i]): # Si el token es un número
+                        numero_traducido = Analex.convertir_numero(tokens[i])
+                        linea_traducida.append(str(numero_traducido))
+                    elif Analex.es_identificador(tokens[i]):  # Si el token es un identificador
+                        linea_traducida.append(tokens[i])
+                    elif tokens[i] in Analex.operadoresR:  # Si el token es un operador de comparación
+                        linea_traducida.append(tokens[i])
+                    i += 1
+                linea_traducida.append(':')
+                        
             else:
                 linea_traducida.append(traducciones[token])
         elif Analex.es_numero(token):
@@ -56,11 +73,10 @@ def traducir_archivo_taan(path_entrada, path_salida):
                 if 'tuun' in linea:
                     archivo_salida.write(traducir_linea(linea, nivel_indentacion) + '\n')
                     nivel_indentacion += 1
+                elif 'ixtak' in linea:
+                    archivo_salida.write(traducir_linea(linea, nivel_indentacion) + '\n')
+                    nivel_indentacion += 1
                 elif 'xuul' in linea:
                     nivel_indentacion -= 1
                 else:
                     archivo_salida.write(traducir_linea(linea, nivel_indentacion) + '\n')
-                    
-# ejemplo de uso
-path = "codigo.taan"
-traducir_archivo_taan(path, "traduccion.py")
