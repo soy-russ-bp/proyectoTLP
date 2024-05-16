@@ -56,7 +56,7 @@ def traducir_linea(linea, nivel_indentacion):
                 linea_traducida.append(traducciones[token])  # Añade 'elif'
                 i += 1  # Avanza al siguiente token, que es la condición
                 # Añade la condición, pero si es número, lo convierte
-                while i < len(tokens) and tokens[i] != '\n':
+                while i < len(tokens) and tokens[i] != 'tuun':
                     if tokens[i] == 'waa': # Si el token es un if
                         pass
                     elif Analex.es_numero(tokens[i]): # Si el token es un número
@@ -66,9 +66,10 @@ def traducir_linea(linea, nivel_indentacion):
                         linea_traducida.append(tokens[i])
                     elif tokens[i] in Analex.operadoresR:  # Si el token es un operador de comparación
                         linea_traducida.append(tokens[i])
-                    elif tokens[i] == 'tuun': #TODO, cambiar el tuun por un :, para que funcione
-                        linea_traducida.append(':')
-                    i += 1     
+                    i += 1 
+                if i < len(tokens) and tokens[i] == 'tuun':  # Verifica si el token actual es 'tuun'
+                    linea_traducida.append(':')
+                    
             else:
                 linea_traducida.append(traducciones[token])
         elif Analex.es_numero(token):
