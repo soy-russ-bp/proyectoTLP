@@ -2,7 +2,7 @@ import Analex
 import Anasin
 import Traductor
 import runpy
-path = "lenguajeTaan/programasTaan/programa3.taan"
+path = "lenguajeTaan/programasTaan/aprobado.taan"
 
 lenguaje_aceptado = Analex.analizador_lexico(path)
 compilacion_exitosa=Anasin.analizador_sintactico()

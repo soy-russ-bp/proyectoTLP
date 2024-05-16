@@ -1,11 +1,11 @@
 IDS
-i, ID1
-j, ID2
+calif, ID1
 
 TXT
-"numero ", TX1
+"Esta es la mejor clase del mundo", TX1
+"zzz", TX2
 
 VAL
-0, VAL1
-2, VAL2
-1, VAL3
+10, VAL1
+10, VAL2
+7, VAL3

@@ -10,6 +10,7 @@ traducciones = {
     'tuun': ':',  # Inicio de bloque de código
     'tsiib': 'print(',  # Inicio de la función print en Python
     'ixtak': 'while',  # Instrucción de bucle while
+    'achak': 'elif',  # Instrucción condicional elif
 }
 
 def traducir_linea(linea, nivel_indentacion):
@@ -51,7 +52,23 @@ def traducir_linea(linea, nivel_indentacion):
                         linea_traducida.append(tokens[i])
                     i += 1
                 linea_traducida.append(':')
-                        
+            elif token == 'achak':  # 'manejo especial para elif'
+                linea_traducida.append(traducciones[token])  # Añade 'elif'
+                i += 1  # Avanza al siguiente token, que es la condición
+                # Añade la condición, pero si es número, lo convierte
+                while i < len(tokens) and tokens[i] != '\n':
+                    if tokens[i] == 'waa': # Si el token es un if
+                        pass
+                    elif Analex.es_numero(tokens[i]): # Si el token es un número
+                        numero_traducido = Analex.convertir_numero(tokens[i])
+                        linea_traducida.append(str(numero_traducido))
+                    elif Analex.es_identificador(tokens[i]):  # Si el token es un identificador
+                        linea_traducida.append(tokens[i])
+                    elif tokens[i] in Analex.operadoresR:  # Si el token es un operador de comparación
+                        linea_traducida.append(tokens[i])
+                    elif tokens[i] == 'tuun': #TODO, cambiar el tuun por un :, para que funcione
+                        linea_traducida.append(':')
+                    i += 1     
             else:
                 linea_traducida.append(traducciones[token])
         elif Analex.es_numero(token):

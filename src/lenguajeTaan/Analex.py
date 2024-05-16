@@ -24,7 +24,8 @@ def separar_tokens(archivo):
                 tokens += s.split()
 
 def es_identificador(s):
-    return s[0].isalpha()
+    return len(s) > 0 and s[0].isalpha()
+
 
 def es_numero(s):
     # Verifica si el string es un número según la representación especial

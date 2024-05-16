@@ -1,5 +1,8 @@
 
-variable = 5
-if variable < 10 :
+calif = 10
+if calif == 10 :
     
-    print( "El  valor  es  menor  que  10" )
+    print( "Esta  es  la  mejor  clase  del  mundo" )
+elif calif < 7 tuun
+    
+    print( "zzz" )
