@@ -16,7 +16,7 @@ tokens = []
 index = 0
 
 def cargar_tokens():
-    with open("lenguajeTaan/tokens.lex", "r") as archivo:
+    with open("lenguajeTaan/compilador/tokens.lex", "r") as archivo:
         global tokens
         tokens = [line.strip() for line in archivo.readlines()]
 

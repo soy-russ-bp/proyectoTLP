@@ -1,0 +1,9 @@
+chuunbes
+i antal 0
+ixtak i < |
+chuunbes
+    tsiib "Iteración " + i
+    i antal i + .
+xuul
+tsiib "Fin del bucle"
+xuul

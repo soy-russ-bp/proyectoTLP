@@ -1,9 +1,0 @@
-IDS
-variable, ID1
-
-TXT
-"El valor es menor que 10", TX1
-
-VAL
-7, VAL1
-10, VAL2

@@ -1,0 +1,11 @@
+IDS
+i, ID1
+
+TXT
+"Iteración ", TX1
+"Fin del bucle", TX2
+
+VAL
+0, VAL1
+5, VAL2
+1, VAL3

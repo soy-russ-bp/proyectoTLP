@@ -1,6 +1,6 @@
 
 
-reservadas = ["chuunbes", "xuul", "antal", "waa", "tuun", "achak", "lxtak", "tsiib" ]
+reservadas = ["chuunbes", "xuul", "antal", "waa", "tuun", "achak", "ixtak", "tsiib" ]
 operadoresA = ["+", "-", "*", "/"]  # Asumimos operadores aritméticos básicos
 operadoresR = ["<", ">", "==", "<=", ">="]  # Agregar operadores de comparación completos
 asignacion = ["antal"]  # Uso de 'antal' como asignación, similar a 'es'
@@ -92,7 +92,7 @@ def imprimir_resultados():
             print(token)
             
 def escribir_resultados_en_archivo():
-    archivo = open("lenguajeTaan/tokens.lex", "w")
+    archivo = open("lenguajeTaan/compilador/tokens.lex", "w")
     for token in tokensSeñalados:
         archivo.write(token + "\n")
     if tokens_NA:
@@ -145,5 +145,5 @@ def analizador_lexico(archivo_path):
     imprimir_resultados()
     escribir_resultados_en_archivo()
     Tabla()
-    archivo_tabla_datos("lenguajeTaan/tabla_datos.txt")
+    archivo_tabla_datos("lenguajeTaan/compilador/tabla_datos.txt")
     return lenguaje_aceptado
