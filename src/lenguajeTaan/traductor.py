@@ -60,3 +60,7 @@ def traducir_archivo_taan(path_entrada, path_salida):
                     nivel_indentacion -= 1
                 else:
                     archivo_salida.write(traducir_linea(linea, nivel_indentacion) + '\n')
+                    
+# ejemplo de uso
+path = "codigo.taan"
+traducir_archivo_taan(path, "traduccion.py")
